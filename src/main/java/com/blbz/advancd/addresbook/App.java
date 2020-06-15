@@ -10,13 +10,15 @@ public class App {
 		AddressBookService addressBookService = new AddressBookServiceImpl();
 		boolean flag = true;
 		while (flag) {
-			System.out.println("1:create ContactPerson \n 2:Terminate");
+			System.out.println("1:create ContactPerson\n 2:Edit\n 3:Terminate");
 			System.out.println("Enter the tab number : ");
 			int choice = InputUtils.getInt();
-
 			switch (choice) {
 			case 1:
 				addressBookService.createContactPerson();
+				break;
+			case 2:
+				addressBookService.editPerson();
 				break;
 			default:
 				flag = false;

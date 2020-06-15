@@ -4,4 +4,6 @@ public interface AddressBookService {
 
 	void createContactPerson();
 
+	void editPerson();
+
 }

@@ -29,4 +29,31 @@ public class AddressBookServiceImpl implements AddressBookService {
 			System.out.println();
 		}
 	}
+
+	public void editPerson() {
+		ContactPerson contactPersonInput = UserInputUtils.getInputForEditPerson();
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getFirstName().equalsIgnoreCase(contactPersonInput.getFirstName())
+					&& list.get(i).getLastName().equalsIgnoreCase(contactPersonInput.getLastName())) {
+				ContactPerson contactPerson = list.get(i);
+				if (contactPersonInput.getAddress() != null) {
+					contactPerson.setAddress(contactPersonInput.getAddress());
+				}
+				if (contactPersonInput.getCity() != null) {
+					contactPerson.setCity(contactPersonInput.getCity());
+				}
+				if (contactPersonInput.getState() != null) {
+					contactPerson.setState(contactPersonInput.getState());
+				}
+				if (contactPersonInput.getZip() != null) {
+					contactPerson.setZip(contactPersonInput.getZip());
+				}
+				if (contactPersonInput.getPhoneNo() != null) {
+					contactPerson.setPhoneNo(contactPersonInput.getPhoneNo());
+				}
+				list.set(i, contactPerson);
+				display(list);
+			}
+		}
+	}
 }
