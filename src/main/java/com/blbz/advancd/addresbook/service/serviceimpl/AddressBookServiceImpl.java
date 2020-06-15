@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import com.blbz.advancd.addresbook.model.ContactPerson;
 import com.blbz.advancd.addresbook.service.AddressBookService;
+import com.blbz.advancd.addresbook.utility.InputUtils;
 import com.blbz.advancd.addresbook.utility.UserInputUtils;
 
 public class AddressBookServiceImpl implements AddressBookService {
@@ -55,5 +56,15 @@ public class AddressBookServiceImpl implements AddressBookService {
 				display(list);
 			}
 		}
+	}
+
+	public void deletePerson() {
+		System.out.println("Enter the employee's first-name and last-name");
+		String firstName = InputUtils.getString();
+		String lastName = InputUtils.getString();
+		list.removeIf(user -> user.getFirstName().equalsIgnoreCase(firstName)
+				&& user.getLastName().equalsIgnoreCase(lastName));
+		display(list);
+
 	}
 }

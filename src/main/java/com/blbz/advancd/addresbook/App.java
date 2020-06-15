@@ -10,7 +10,7 @@ public class App {
 		AddressBookService addressBookService = new AddressBookServiceImpl();
 		boolean flag = true;
 		while (flag) {
-			System.out.println("1:create ContactPerson\n 2:Edit\n 3:Terminate");
+			System.out.println("1:create ContactPerson\n 2:Edit\n 3:Delete\n 4:Terminate");
 			System.out.println("Enter the tab number : ");
 			int choice = InputUtils.getInt();
 			switch (choice) {
@@ -19,6 +19,9 @@ public class App {
 				break;
 			case 2:
 				addressBookService.editPerson();
+				break;
+			case 3:
+				addressBookService.deletePerson();
 				break;
 			default:
 				flag = false;
