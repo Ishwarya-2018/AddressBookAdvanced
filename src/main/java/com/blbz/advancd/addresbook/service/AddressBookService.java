@@ -14,4 +14,6 @@ public interface AddressBookService {
 
 	void viewPersonByCityAndState();
 
+	void searchByCityAndState();
+
 }

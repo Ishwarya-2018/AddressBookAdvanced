@@ -3,8 +3,10 @@ package com.blbz.advancd.addresbook.service.serviceimpl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import com.blbz.advancd.addresbook.model.ContactPerson;
 import com.blbz.advancd.addresbook.service.AddressBookService;
@@ -18,7 +20,7 @@ public class AddressBookServiceImpl implements AddressBookService {
 	private ArrayList<ContactPerson> list = new ArrayList<ContactPerson>();
 	private TreeSet<ContactPerson> sortedUsers;
 	private Map<String, ArrayList<String>> cityPerson = new HashMap<>();
-	private Map<String, ArrayList<String>> statePerson =  new HashMap<>();
+	private Map<String, ArrayList<String>> statePerson = new HashMap<>();
 
 	public void createContactPerson() {
 		ContactPerson contactPerson = UserInputUtils.getInputForNewUser();
@@ -34,13 +36,6 @@ public class AddressBookServiceImpl implements AddressBookService {
 	public static void display(Collection<ContactPerson> list1) {
 		for (ContactPerson contactPerson : list1) {
 			System.out.println(contactPerson.toString());
-			// System.out.println(contactPerson.getFirstName());
-			// System.out.println(contactPerson.getLastName());
-			// System.out.println(contactPerson.getAddress());
-			// System.out.println(contactPerson.getCity());
-			// System.out.println(contactPerson.getState());
-			// System.out.println(contactPerson.getZip());
-			// System.out.println(contactPerson.getPhoneNo());
 			System.out.println();
 		}
 	}
@@ -94,32 +89,41 @@ public class AddressBookServiceImpl implements AddressBookService {
 		display(sortedUsers);
 	}
 
-	public void viewPersonByCityAndState() {
-		list.forEach(contactPerson ->{
-			if(cityPerson.containsKey(contactPerson.getCity())){
-				cityPerson.get(contactPerson.getCity()).add(contactPerson.getFirstName() +" "+contactPerson.getLastName());
-				//cityPerson.put(contactPerson.getCity(), cityPerson.get(contactPerson.getCity()).add(contactPerson.getFirstName()+" "+contactPerson.getFirstName()));
-			}
-			else{
+	public void storePersonBasedCityAndState() {
+		list.forEach(contactPerson -> {
+			if (cityPerson.containsKey(contactPerson.getCity())) {
+				cityPerson.get(contactPerson.getCity())
+						.add(contactPerson.getFirstName() + " " + contactPerson.getLastName());
+			} else {
 				ArrayList<String> names = new ArrayList<String>();
-				names.add(contactPerson.getFirstName() +" "+contactPerson.getLastName());
+				names.add(contactPerson.getFirstName() + " " + contactPerson.getLastName());
 				cityPerson.put(contactPerson.getCity(), names);
 			}
-			
-			if(statePerson.containsKey(contactPerson.getState())){
-				statePerson.get(contactPerson.getState()).add(contactPerson.getFirstName() +" "+contactPerson.getLastName());
-			}
-			else{
+
+			if (statePerson.containsKey(contactPerson.getState())) {
+				statePerson.get(contactPerson.getState())
+						.add(contactPerson.getFirstName() + " " + contactPerson.getLastName());
+			} else {
 				ArrayList<String> names = new ArrayList<String>();
-				names.add(contactPerson.getFirstName() +" "+contactPerson.getLastName());
+				names.add(contactPerson.getFirstName() + " " + contactPerson.getLastName());
 				statePerson.put(contactPerson.getState(), names);
 			}
 		});
-		
+	}
+
+	public void viewPersonByCityAndState() {
+		storePersonBasedCityAndState();
 		System.out.println("Dictionary order for State");
 		System.out.println(statePerson);
 		System.out.println("Dictionary order for city");
 		System.out.println(cityPerson);
-		
+	}
+
+	public void searchByCityAndState() {
+		System.out.println("Search person by city or state");
+		String cityState = InputUtils.getString();
+		List<ContactPerson> list1 = list.stream().filter(contactPerson -> (contactPerson.getCity().equals(cityState)
+				|| contactPerson.getState().equals(cityState))).collect(Collectors.toList());
+		display(list1);
 	}
 }
