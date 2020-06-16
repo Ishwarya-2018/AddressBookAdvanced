@@ -1,5 +1,12 @@
 package com.blbz.advancd.addresbook.service.serviceimpl;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -14,6 +21,8 @@ import com.blbz.advancd.addresbook.utility.AddressBookNameComparator;
 import com.blbz.advancd.addresbook.utility.AddressBookZipComparator;
 import com.blbz.advancd.addresbook.utility.InputUtils;
 import com.blbz.advancd.addresbook.utility.UserInputUtils;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class AddressBookServiceImpl implements AddressBookService {
 
@@ -21,6 +30,10 @@ public class AddressBookServiceImpl implements AddressBookService {
 	private TreeSet<ContactPerson> sortedUsers;
 	private Map<String, ArrayList<String>> cityPerson = new HashMap<>();
 	private Map<String, ArrayList<String>> statePerson = new HashMap<>();
+
+	public AddressBookServiceImpl() {
+		readContactPersonJson();
+	}
 
 	public void createContactPerson() {
 		ContactPerson contactPerson = UserInputUtils.getInputForNewUser();
@@ -125,5 +138,19 @@ public class AddressBookServiceImpl implements AddressBookService {
 		List<ContactPerson> list1 = list.stream().filter(contactPerson -> (contactPerson.getCity().equals(cityState)
 				|| contactPerson.getState().equals(cityState))).collect(Collectors.toList());
 		display(list1);
+	}
+
+	public void readContactPersonJson() {
+
+		Reader reader;
+		try {
+			reader = new FileReader("E:/myCodingWorld/addressbook.json");
+			ArrayList<ContactPerson> jsonData = new Gson().fromJson(reader, new TypeToken<ArrayList<ContactPerson>>() {
+			}.getType());
+			list = jsonData;
+			System.out.println(jsonData);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

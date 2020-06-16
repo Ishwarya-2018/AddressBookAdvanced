@@ -1,0 +1,47 @@
+[
+	{
+		"firstName": "Tom",
+		"lastName": "trump",
+		"address": "line2-sa",
+		"city": "newYork",
+		"state": "newYork",
+		"zip": 4920001,
+		"phoneNo": 7898257711
+	},
+	{
+		"firstName": "Jim",
+		"lastName": "toreto",
+		"address": "line1-streat",
+		"city": "sanfransisco",
+		"state": "sanfransisco",
+		"zip": 4920002,
+		"phoneNo": 7898257711
+	},
+	{
+		"firstName": "aish",
+		"lastName": "sp",
+		"address": "neharu",
+		"city": "chitradurga",
+		"state": "karnataka",
+		"zip": 57750,
+		"phoneNo": 923456781
+	},
+	{
+		"firstName": "tom",
+		"lastName": "pate",
+		"address": "slkjdf",
+		"city": "sldkjg",
+		"state": "asdjg",
+		"zip": 123,
+		"phoneNo": 2345
+	},
+	{
+		"firstName": "uhb",
+		"lastName": "jhb",
+		"address": "okjok",
+		"city": "kj",
+		"state": "ijn",
+		"zip": 52652,
+		"phoneNo": 526526
+	}
+]
