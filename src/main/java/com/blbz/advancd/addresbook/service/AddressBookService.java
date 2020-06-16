@@ -10,4 +10,6 @@ public interface AddressBookService {
 
 	void sortByName();
 
+	void sortByZip();
+
 }

@@ -7,6 +7,7 @@ import java.util.TreeSet;
 import com.blbz.advancd.addresbook.model.ContactPerson;
 import com.blbz.advancd.addresbook.service.AddressBookService;
 import com.blbz.advancd.addresbook.utility.AddressBookNameComparator;
+import com.blbz.advancd.addresbook.utility.AddressBookZipComparator;
 import com.blbz.advancd.addresbook.utility.InputUtils;
 import com.blbz.advancd.addresbook.utility.UserInputUtils;
 
@@ -79,6 +80,12 @@ public class AddressBookServiceImpl implements AddressBookService {
 
 	public void sortByName() {
 		sortedUsers = new TreeSet<>(new AddressBookNameComparator());
+		sortedUsers.addAll(list);
+		display(sortedUsers);
+	}
+
+	public void sortByZip() {
+		sortedUsers = new TreeSet<>(new AddressBookZipComparator());
 		sortedUsers.addAll(list);
 		display(sortedUsers);
 	}
