@@ -66,14 +66,14 @@ public class ContactPerson {
 		this.phoneNo = phoneNo;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		return result;
-	}
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+//		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+//		return result;
+//	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -87,9 +87,17 @@ public class ContactPerson {
 		if (firstName == null && lastName == null) {
 			if (other.firstName != null && other.lastName != null)
 				return false;
-		} else if (! (firstName + lastName).equals(other.firstName + other.lastName))
+		} else if (!(firstName + lastName).equals(other.firstName + other.lastName))
 			return false;
 		return true;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "ContactPerson [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city="
+				+ city + ", state=" + state + ", zip=" + zip + ", phoneNo=" + phoneNo + ", getFirstName()="
+				+ getFirstName() + ", getLastName()=" + getLastName() + ", getAddress()=" + getAddress()
+				+ ", getCity()=" + getCity() + ", getState()=" + getState() + ", getZip()=" + getZip()
+				+ ", getPhoneNo()=" + getPhoneNo() +"]";
+	}
 }

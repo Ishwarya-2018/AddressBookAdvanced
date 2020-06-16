@@ -8,4 +8,6 @@ public interface AddressBookService {
 
 	void deletePerson();
 
+	void sortByName();
+
 }
