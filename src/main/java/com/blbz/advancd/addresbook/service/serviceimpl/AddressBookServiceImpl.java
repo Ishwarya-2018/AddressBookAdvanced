@@ -2,6 +2,8 @@ package com.blbz.advancd.addresbook.service.serviceimpl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.TreeSet;
 
 import com.blbz.advancd.addresbook.model.ContactPerson;
@@ -15,6 +17,8 @@ public class AddressBookServiceImpl implements AddressBookService {
 
 	private ArrayList<ContactPerson> list = new ArrayList<ContactPerson>();
 	private TreeSet<ContactPerson> sortedUsers;
+	private Map<String, ArrayList<String>> cityPerson = new HashMap<>();
+	private Map<String, ArrayList<String>> statePerson =  new HashMap<>();
 
 	public void createContactPerson() {
 		ContactPerson contactPerson = UserInputUtils.getInputForNewUser();
@@ -88,5 +92,34 @@ public class AddressBookServiceImpl implements AddressBookService {
 		sortedUsers = new TreeSet<>(new AddressBookZipComparator());
 		sortedUsers.addAll(list);
 		display(sortedUsers);
+	}
+
+	public void viewPersonByCityAndState() {
+		list.forEach(contactPerson ->{
+			if(cityPerson.containsKey(contactPerson.getCity())){
+				cityPerson.get(contactPerson.getCity()).add(contactPerson.getFirstName() +" "+contactPerson.getLastName());
+				//cityPerson.put(contactPerson.getCity(), cityPerson.get(contactPerson.getCity()).add(contactPerson.getFirstName()+" "+contactPerson.getFirstName()));
+			}
+			else{
+				ArrayList<String> names = new ArrayList<String>();
+				names.add(contactPerson.getFirstName() +" "+contactPerson.getLastName());
+				cityPerson.put(contactPerson.getCity(), names);
+			}
+			
+			if(statePerson.containsKey(contactPerson.getState())){
+				statePerson.get(contactPerson.getState()).add(contactPerson.getFirstName() +" "+contactPerson.getLastName());
+			}
+			else{
+				ArrayList<String> names = new ArrayList<String>();
+				names.add(contactPerson.getFirstName() +" "+contactPerson.getLastName());
+				statePerson.put(contactPerson.getState(), names);
+			}
+		});
+		
+		System.out.println("Dictionary order for State");
+		System.out.println(statePerson);
+		System.out.println("Dictionary order for city");
+		System.out.println(cityPerson);
+		
 	}
 }

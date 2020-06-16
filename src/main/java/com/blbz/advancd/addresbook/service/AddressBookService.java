@@ -12,4 +12,6 @@ public interface AddressBookService {
 
 	void sortByZip();
 
+	void viewPersonByCityAndState();
+
 }
