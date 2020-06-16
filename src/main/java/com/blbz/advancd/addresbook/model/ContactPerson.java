@@ -65,4 +65,31 @@ public class ContactPerson {
 	public void setPhoneNo(Long phoneNo) {
 		this.phoneNo = phoneNo;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ContactPerson other = (ContactPerson) obj;
+		if (firstName == null && lastName == null) {
+			if (other.firstName != null && other.lastName != null)
+				return false;
+		} else if (! (firstName + lastName).equals(other.firstName + other.lastName))
+			return false;
+		return true;
+	}
+	
 }

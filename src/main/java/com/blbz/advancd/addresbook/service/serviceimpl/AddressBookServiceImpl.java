@@ -14,7 +14,12 @@ public class AddressBookServiceImpl implements AddressBookService {
 
 	public void createContactPerson() {
 		ContactPerson contactPerson = UserInputUtils.getInputForNewUser();
-		list.add(contactPerson);
+		boolean isPersonPresent = list.stream().filter(obj -> (obj.equals(contactPerson))).findFirst().isPresent();
+		if (!isPersonPresent) {
+			list.add(contactPerson);
+		} else {
+			System.out.println("Person Already present please give different person name");
+		}
 		display(list);
 	}
 
